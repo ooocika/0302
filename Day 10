@@ -1,0 +1,766 @@
+object Obj{
+  const val CONST = 1
+}
+
+class C{
+  companion object{
+    const val VERSION = 9
+  }
+}
+const val MAX = 239
+//
+int constant = Obj.CONST;
+int max = ExampleKt.MAX;
+int version = C.VERSION;
+//
+class C{
+  companion object{
+    @JvmStatic fun callStatic() {}
+    fun callNonStatic(){}
+  }
+}
+//
+C.callStatic();
+C.callNonStatic();
+C.companion.callStatic();
+C.companion.callNonStatic();
+//
+object Obj{
+  @JvmStatic fun callStatic(){}
+  fun callNonStatic(){}
+}
+//
+Obj.callStatic();
+Obj.callNonStatic();
+Obj.INSTANCE.callNonStatic();
+Obj.INSTANCE.callStatic();
+
+//
+interface ChatBot{
+  companion object{
+    @JvmStatic fun greet(username: String){
+      println("Hello", $username)
+    }
+  }
+}
+//
+interface Robot{
+  fun move() { println("walking~"
+  )}
+  fun speak(): Unit
+}
+//
+public class C3PO implements Robot{
+
+  @Override
+  public void speak(){
+    System.out.println(" I beg your pardon, sir");
+  }
+}
+//
+C3PO c3po = new C3OP();
+c3po.move();
+c3.po.speak();
+//
+public class BB8 implements Robot{
+  @Override 
+  public void move(){
+    System.out.println("Rolling!");
+  }
+
+  @Override
+  public void speak(){
+    System.out.println("Beep - beep");
+  }
+}
+//
+kotlin.jvm.JvmClassMappingKt.getKotlinClass(MainView.class)
+
+//
+fun List<String>.filterValid(): List<String>
+  fun List<Int>.filterValid(): List<Int>
+  //
+  fun List<String>.filterValid(): List<String>
+
+  @Jvm List<Int>.filterValid(): List<Int>
+  //
+  val x: Int
+@JvmName("getX_prop")
+get() = 15
+
+fun getX() = 10
+//
+@get:JvmName("x")
+@set:JvmName("changeX")
+var x:Int = 23
+//
+class Circle @JvmOverloads constructor(centerX: Int, centerY: Int, radius: Double = 1.0){
+  @JvmOverloads fun draw(label: String, lineWidth: Int =1, color: String = "red")
+}
+//
+Circle(int centerX, int centerY, double radius)
+Circle(int centerX, int centerY)
+
+void draw(String label, int lineWidth, String color){}
+void draw(Strinig label, int lineWidth){}
+void draw(String label) {}
+//
+fun writeToFile(){
+  throw IOException()
+}
+//
+try{
+  demo.Example.writeToFile();
+}catch(IOException e){
+  
+}
+//
+@Throws(IOException :: class)
+fun writeToFile(){
+  throw IOException()
+}
+//
+class Box<out T>(val value : T)
+interface Base
+class Derived : Base
+
+fun boxDerived(value: Derived): Box<Derived> = Box(value)
+fun unboxBase(box: Box<Base>): Base = box.value
+//
+Box<Derived> boxDerived(Derived value)
+Base unboxBase(Box<Base>box)
+//
+Base unboxBase(Box<? extends Base> box)
+//
+Box<Derived> boxDerived(Derived value)
+
+Base unboxBase(Box<? extends Base> box)
+//
+fun boxDerived(value: Derived):Box <@JvmWildcard Derived>  = Box(value//
+                                                                )
+//
+fun unboxBase(box: Box<@JvmSuppressWildcards Base>): Base = box.value
+//
+fun emptyList(): List<Nothing> = listOf()
+//
+plugins{
+  id("org..springframework.boot")version "3.1.2"
+  id("io.spring.dependency-management")version "1.1.2"
+  kotlin("jvm")version "1.9.20"
+  kotlin("plugin.spring")version "1.9.20"
+}
+//
+group = "com.example"
+version = "0.0.01-SNAPSHOT"
+
+java{
+  sourceCompatibility = JavaVersion.VERSION_17
+}
+repositories{
+  mavenCentral()
+}
+dependencies{
+  implementation("org.springframework.boot:spring-boot-starter-data-jdbc")
+  implementation("org.springframework.boot:spring-boot-starter-web")
+  implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
+  implementation("org.jetbrains.kotlin:kotlin-reflect")
+
+runtimeOnly("com.h2database:h2")
+testImplementation("org.springframework.boot:spring-boot-starter-test")
+
+}
+tasks.withType<KotlinCompile>{
+  kotlinOptions{
+    freeCompilerArgs = listOf("-Xjsr305=strict")
+    jvmTarget = "17"
+  }
+  
+}
+tasks.withType<Test>{
+  userJUnitPlatform()
+}
+//
+@SpringBootApplication
+class DemoApplication
+
+fun main(args: Array<String>){
+  runApplication<DemoApplicaion>(*args)
+}
+//
+@RestController
+class MessageController{
+  @GetMapping("/")
+  fun index(@RequestParam("name")name: String) = "Hello, $name!"
+}
+//
+@GetMapping("/")
+fun index(@RequestParam("name")name : String) = "HEllo,$name!"
+//
+@SpringBootApplicaion
+class DemoApplicaion
+
+
+@RestController
+class MessageController{
+  @GetMapping
+  fun index(@RequestParam("name") name: Stirng) = "Hello, $name!"
+}
+//
+data class Message(val id: String?, val text: String)
+//
+Message(null, "hello!")
+//
+@RestController
+class MessageController{
+  @GetMapping("/")
+fun index() = listOf(
+  Message("1", "hello")
+  Message("2","Bonjour")
+  Message("3"< "Privet")  
+)
+}
+//
+@Service
+class MessageService(val db: JdbcTemplate){
+  fun findMessages(): List<Message> =db.query("select*from message"){
+    response, _ ->
+    Message(response.getString("id"), response.getString("text"))
+  }
+  fun save(message: Message){
+    db.update("insert into messages value (?, ?)",
+             message.id, message.text)
+  }
+}
+//
+@Service
+class MessageService(val db: JdbcTemplate)
+//
+db.query("..", RomMapper{})
+//
+db.query("..", {..})
+//
+db.query("select*from messages"){response, -> 
+Message(response.getString("id"), response.getString("text"))}
+//
+@RestController
+class MessageController(val service: MessageService){
+  GetMapping("/")
+  fun index(): List<Message> = service.findMessages()
+
+  @PostMapping("/")
+  fun post(@RequestBody message: Message){
+    service.save(message)
+  }
+}
+//
+data class Message (val id: String?, val text: String)
+
+//
+@Service
+class MessageService(val db: JdbcTemplate){
+  fun findMessages(): List<Message> = db.query("select * from messages"){
+    response, _ ->
+    Message(response.getString("id"), response.getString("text"))
+  }
+fun save(message: Message){
+  val id = message.id ? : UUID.randomUUID(), toString()
+  db.update("insert into messages values (?, ?)",
+           id, message.text)
+}
+
+}
+//
+Content-Type: applicaion/json
+{
+  "text": "Hello"
+}
+
+###Post "Bonjour!"
+
+POST http://localhost:8080/
+Content-Type: applicaion/json
+{
+  "text": "Bonjour"
+}
+
+###Post"Privet"
+
+POST http://localhost:8080/
+Content-Type:applicaion/json
+{
+  "text": "Privet"
+}
+
+###Get all the messages
+GET http://localhost:8080/
+//
+curl -X POST --location "http://localhost:8080" - H "Content-Type: applicaion/json" -d"{\"text\": "hello\"}"
+//
+@Service
+class MessageService(val db: JdbcTemplate) {
+fun findMessages(): List<Message> = db.query("select * from messages") { response, _ ->
+Message(response.getString("id"), response.getString("text"))
+}
+fun findMessageById(id: String): List<Message> = db.query("select * from messages where id = ?", id) { response, _ ->
+Message(response.getString("id"), response.getString("text"))
+}
+fun save(message: Message) {
+
+  val id = message.id ?: UUID.randomUUID().toString()
+  db.update("insert into messages values ( ?, ? )",
+
+            id, message.text)
+}
+}//
+@RestController
+class MessageController(val service: MessageService){
+  @GetMapping("/")
+  fun index(): List<Message> = service.findMessages()
+
+  @GetMapping("/{id}")
+  fun index(@PathVariable id: String): List<Message> = 
+  service.findMessageById(id)
+
+  @PostMapping("/")
+  fun post(@RequestBody message: Message){
+    service.save(message)
+  }
+}
+//
+
+
+@Table("MESSAGES")
+data class Message(@Id var id: String?, val text: String)
+//
+interface MessageRepository : CrudRepository<Message, String>
+
+  //
+  @Service
+  class MessageService (val db: MessageRepository){
+    fun findMessages(): List<Message> = db.findAll().toList()
+
+    fun findMessageById(id: String) : List<Message> = db.findById(id).toList()
+  
+    fun save(message: Message){
+      db.save(message)  
+    }
+    fun <T: Any> Optional<out T>.toList(): List<T> = 
+    if(isPresent) listOf(get()) else emptyList()
+  }
+  //
+  dependencies{
+    testImplementation(kotlin("test"))
+  }
+  //
+ tasks.test{
+   useJUnitPlatform()
+ }
+ //
+ class Sample(){
+   fun sum(a: Int, b: Int): Int{
+     return a+b
+   }
+ }
+ //
+ internal class SampleTest{
+   private val testSample: Sample = Sample()
+
+   @Test
+   fun testSum(){
+     val expected = 42
+     assertEquals(expected, testSample.sum(40, 2))
+   }
+ }
+ //
+ @Test
+ fun testSum(){
+   val expected  =43
+   assertEquals(expected, classForTesting.sum(40,2))
+ }
+ //
+ public class Customer{
+   private String name;
+
+   public Customer(String s){
+     name = s;
+     
+   }
+   public String getName(){
+     return name;
+   }
+   public void setName(String name){
+     this.name = name;
+   }
+   public void placeOrder(){
+     System.out.println("A new order is placed by" + name);
+   }
+ }
+ ///
+ val customer = Customer("Phase")
+ println(customer.nmae)
+ println(customer.placeOrder())
+ //
+ public record Person(String name , int age){}
+ //
+ val newPerson = Person("Kotlin", 10)
+
+ val firstName = newPerson.name
+//
+@JvmRecord
+data class Person(val name: String, val age: Int)
+//
+String name = "Joe";
+System.out.println("hello ,"+ name)
+Systen.out.println("your name is" + name.length()+"characters long");
+
+//
+fun main(){
+val name = "Joe"
+  println("hello, $name")
+  println("your name is $ {name.length}characters long")
+}
+//
+StringBuilder countDown = new StringBuidler();
+for(int i =  5; i>0; i--){
+  countDown.append(i);
+  countDown.append("\n");
+  
+}
+System.out.println(countDown);
+//
+fun main()}{
+  val countDown = buildString{
+    for(i in 5 downTo 1){
+      append(i)
+      appendLine()
+    }
+  }
+  println(countDown)
+}
+//
+List<Integer> numbers = List.of(1,2,3,4,5,6);
+String invertedOddNumbers = numbers
+.stream()
+.fitler(it -> it%2 != 0)
+.map(it -> -it)
+.map(Object::toString)
+.collect(Collectors.joining(";"));
+System.out.println(invertedOddNumbers);
+//
+fun main(){
+val number = listOf(1,2,3,4,5,6)
+val invertedOddNumbers = numbers
+  .filter{it % 2!= 0}
+  .joinToString(separator = ";"){"${-it}"}
+println(invertedOddNumbers)
+}
+//
+public void defaultValueIfStringIsBlank(){
+  String nameValue = getName();
+  String name = nameValue.isBlank()? "John Doe": nameValue;
+  System.out.println(name);
+}
+public String getName(){
+  Random rand = new Random();
+  return rand.nextBoolean()? "" : "David";
+  
+}
+//
+fun main(){
+  val name = getName().ifBlank{"John Doe"}
+  println(name)
+}
+fun getName(): String = 
+  if(Random.nextBoolean())""else "David"
+//
+String input = "##place##holder##"
+String result = input.replaceAll("^##|##$", "");
+System.out.println(result);;
+//
+fun main(){
+  val input = "##place##holder##"
+  val result = input.removeSurrounding("##")
+println(result)
+}
+//
+String input ="login: Pokemon5, password: 1q2w3e4r5t";
+Pattern pattern = Pattern.compile("\\w*\\d+\\w*");
+Matcher matcher = pattern.mathcer(input);
+String replacementResult = mathcer.replaceAll(it -> "xxx")
+System.out.println("Initial input: '" + input + "'")
+System.out.println("Anonymized input: '" + replacementResult + "'");
+
+//
+fun main(){
+  val regex = Regex ("""\w*\d+\w*""")
+  val input = "login: Pokemon5, password: 1q2w3e4r5t"
+  val replacementResult = regex.replace(input, replacement = "xxx")
+
+  println("Initial input: " '$input'")
+          println("Anonymized input: '$replacementResult'")
+}
+//
+System.out.println(Arrays.toString("Sometimes.text.should.be.split".split("\\.")));
+
+          fun main(){
+            println("sometimes.text.should.be.split".split("."))
+          }
+          //
+          String input = "what is the answer to the Ultimate Question of Life,
+          the Universe, and Everything? 42";
+          String answer = input.substring(input.indexOf("?")+1);
+          System.out.println(answer);
+
+          //f
+  fun main(){
+    val input = "What is the answer to the Ultimate Question of Life,e Universe, and Everything? 42"
+    val answer = input.substringAfter("?")
+  println(answer)
+  
+  
+  
+  //
+  }
+
+  fun main(){
+    val input("To be, or not to be, that is the question."
+              val question = input.substringAfterLast(",")
+              println(question)
+  }
+  //
+  String lineSeparator = System.getProperty("line.separator");
+              String result = String.join(lineSeparator,
+                                         "Kotlin",
+                                         "java");
+              System.out.println(result);
+              //
+              String result ="""
+              
+              kotlin
+              java
+              """;
+              System.out.println(result)
+              //
+              fun main()[
+                val result = """
+                kotlin
+                java
+                """
+                .trimIndent()
+                println(result)
+              ]
+              //
+              fun main(){
+              val result ="""
+                #Kotlin
+                #Java
+                """  .trimMargin("#")
+                println(result)
+              }
+              //
+              public List<Customer> getCustomer(){}
+
+              List<String> numbers = Arrays.asList("one", " two", " three", " four");
+              numbers.add("five");
+              //
+              List<String> numbers = new LinkedList<>();
+
+              List<String>immutableCollection = Collections.unmodifiableList(number);
+              immutableCollection.add("five");
+              //
+              val numbers = mutableListOf("one"," two", " three", " four")
+              numbers.add("five")
+              val immutableNumbers =  listOf("one", " two")
+              //
+              class Shape{}
+
+              class Rectangle extends Shape{}
+
+              public voi doSthWithShapes(List<? extends Shape>shape){
+                
+              }
+              public void main(){
+                 var rectangles = List.of(new Rectangle(), new Rectangle());
+                doSthWithShapes(rectangles);
+              }
+              //
+              open class Shape(val name : String)
+
+              class Rectangle(private val rectangleName: String) : Shape(rectangleName)
+
+              fun doSthWithShapes(shapes : List<Shape>){
+                println("The shapes are: $ {shapes.joinToString{it.name }}")
+              }
+
+              fun main(){
+              val rectangles = listOf(Rectangle("rhombus"), Rectangle("parallelepiped"))
+              doSthWithShapes(rectangles)
+              }
+              //
+ class Version implements Comparable<Version>{
+
+   int major;
+   int minor;
+
+   Version(int major, int minor){
+     this.major = major;
+     this.minor = minor;
+   }
+   @override
+   public in compareTo(Version o){
+     if(this.major != o.major){
+       return this.major - o.minor;
+     }
+   }
+   public voi compareVersion(){
+     var minVersion = new Version(1,11);
+     var maxVersion = new Version(1, 31);
+     System.out.println(
+       versionIsInRange(new Version(0, 9), minVersion, maxVersion));
+     System.out.println(
+       versionIsInRange(new Version(1,20), minVersion, maxVersion));
+   }
+
+   public Boolean versionIsInRange(Version versionToCheck, Version minVersion, 
+                                  Version maxVersion){
+     return versionToCheck.compareTo(minVersion) >= -
+     && versionToCheck.compareTo(maxVersion) <= 0 ;
+     
+                                  }
+ }   
+ //
+ class Version (val major: Int, val minor: Int): Comparable<Version>{
+   override fun compareTo(other: Version): Int{
+     if(this.major != other.major){
+       return this.major - other.major
+     }
+     return this.major - other.minor
+   }
+ }
+ fun main(){
+   val versionRange = Version(1,11).. Version(1,30)
+   println(Version(0, 9) in versionRange)
+   println(Version(1, 20) in versionRange)
+ }
+ //
+ class Person implements Comparable <Person>{
+   String name;
+   int age;
+   public String getName(){
+     return name;
+   }
+   public int getAge(){
+     return age;
+   }
+   Person(String name, int age){
+     this.name = name;
+     this.age = age;
+   }
+
+   @override 
+   public String toString(){
+     return this.name + " "+ age;
+   }
+ }
+ public void comparePersons()}{
+   var persons = List.of(new Person("Jack", 35), new Person("David", 30)),
+   new Person("Jack", 25));
+   System.out.println(persons.stream().sorted(Comparator
+                                             .comparing(Person::getName)
+                                             .thenComparingInt(Person::getAge)).collect(toList()));
+ }
+ //
+ data class person(
+
+   val name : String,
+   val age : Int
+ )
+
+ fun main(){
+ val person = listOf(Person("jack", 35), Person("David", 30)),
+   Person("jack", 25))
+   println(persons.sortedWith(compareBy(Person::name, Person::age)))
+ }
+ //
+ int sum = IntStream.iterate(1, e-> e+3)
+ .limit(10).sum();
+              System.out.println(sum);
+              //
+              fun main(){
+                val sum = generateSequence(1){
+                  it + 3
+                  
+                }.take(10).sum()
+                println(sum)
+              }
+              //
+              public void remove(){
+                var numbers = new ArrayList<>();
+                numbers.add(1);
+                numbers.add(2);
+                
+                numbers.add(3);
+                numbers.add(1);
+
+                numbers.remove(1);
+
+                System.out.println(numbers);
+                numbers.remove(Integer.valueOf(1));
+  System.out.println(numbers)
+
+
+                
+              }
+              //
+              fun main(){
+                val numbers = mutableListof(1,2,3,1)
+                numbersr.removeat(0)
+                println(numbers)
+                numbers.remove(1)
+                println(numbers)
+                
+
+              }
+
+              //
+              numbers.forEach((k,v) -> System.out.println("Key = " + K + ",Value= ") + v);
+              for((k,v)in numbers){
+                println("Key = $k, Value = $v")
+              }
+              numbers.forEach{(k,v) -> println("Key = $k, Value = $v")}
+              //
+              var list = new ArrayList<>();
+
+              if(list.size() > 0){
+                System.out.println(list.get(0));
+                System.out.println(list.get(list.size() - 1));
+              }
+              //
+              var deque = new ArrayDeque<>();
+              if(deque.size() > 0 ){
+                System.out.println(deque.getFirst());
+                System.out.println(deque.getLast());
+              }
+
+              ..
+      //
+              val emails = listOf<String>()
+              val theOldestEmail = emails.firstOrNull()?:""
+              val theFreshestEmail = emails.lastOrNull()?:""
+
+              //
+              public void listToSet(){
+                var sourceList=  List.of(1,2,3,1);
+                var copySet = Set.copyOf(sourceList);
+                system.out.println(copySet);
+              }
+              /
+
+        fun main(){
+          val sourceList = listOf(1,2,3,1)
+          val copySet = sourceList.toSet()
+          println(copySet)
+        }
+        //
+        
+        625P
